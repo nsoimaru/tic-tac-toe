@@ -14,22 +14,96 @@
 
 body {
     margin: 0;
+    background: rgb(226,245,243);
+    background: radial-gradient(circle, rgba(226,245,243,1) 0%, rgba(226,236,247,1) 100%);
 }
 
 .board {
     width: 100vw;
     height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.game-board {
+    background: var(--light-color);
+    width: calc(var(--cell-size)*3);
+    height: calc(var(--cell-size)*3);
     display: grid;
     justify-content: center;
     align-content: center;
     justify-items: center;
     align-items: center;
     grid-template-columns: repeat(3, auto);
+    -webkit-box-shadow: 8px 8px 24px 0px rgba(23, 29, 66, 1);
+    -moz-box-shadow: 8px 8px 24px 0px rgba(23, 29, 66, 1);
+    box-shadow: 8px 8px 24px 0px rgba(23, 29, 66, 1);
 }
 
 .cell {
     width: var(--cell-size);
     height: var(--cell-size);
-    background: var(--dark-color); 
-    border: 1px solid var(--light-color);   
+    border: 1px solid var(--dark-color); 
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    position: relative;
+}
+
+.cell:first-child,
+.cell:nth-child(2),
+.cell:nth-child(3) {
+    border-top: none;
+}
+
+.cell:nth-child(3n + 1){
+    border-left: none;
+}
+
+.cell:nth-child(3n + 3){
+    border-right: none;
+}
+
+.cell:nth-child(7),
+.cell:nth-child(8),
+.cell:last-child {
+    border-bottom: none;
+}
+
+.cell.x::before,
+.cell.x::after {
+    content: '';
+    position: absolute;
+    width: calc(var(--mark-size)*.15);
+    height: var(--mark-size);
+    background: var(--dark-color);
+}
+
+.cell.x::before {
+    transform: rotate(45deg);
+}
+
+.cell.x::after {
+    transform: rotate(-45deg);
+}
+
+.cell.o::before,
+.cell.o::after {
+    content: '';
+    position: absolute;
+}
+
+.cell.o::before {
+    width: var(--mark-size);
+    height: var(--mark-size);
+    border-radius: 50%;    
+    background: var(--dark-color);
+}
+
+.cell.o::after {
+    width: calc(var(--mark-size)*.75);
+    height: calc(var(--mark-size)*.75);
+    border-radius: 50%;    
+    background: var(--light-color);
 }
